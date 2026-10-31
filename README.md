@@ -1,4 +1,7 @@
-# Dead Babies X — PS Vita native port preview
+# DeadBabiesX-psvita-port
+psvita port of the og xbox homebrew game DeadBabiesX xtreme
+
+[Latest release](https://github.com/joesnose/DeadBabiesX-psvita-port/releases/latest)
 
 **[Download the Vita VPK](downloads/DeadBabiesX-Vita-v0.1.vpk?raw=true)**
 
