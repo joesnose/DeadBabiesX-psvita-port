@@ -38,3 +38,16 @@ If a crash remains, retain ux0:data/DeadBabiesX/native.log, any
 lan-diagnostics.txt, the Vita error code and the corresponding ux0:data/*.psp2dmp
 file if generated. Debug symbols matching this build are included in the
 companion developer archive.
+
+## v0.3: correct incomplete v0.2 pthread linkage
+
+v0.2 enabled the C++ threading probe but still left pthread_once,
+pthread_cond_wait and pthread_cond_broadcast as unresolved weak symbols.
+C++ runtime startup can call these functions, causing an immediate crash.
+v0.3 links the entire pthread archive, ensuring every referenced pthread
+function is defined. The regression check now rejects any unresolved
+pthread_* or sched_* symbol, and demonstrably rejects the v0.2 ELF.
+
+Package: DeadBabiesX-Vita-v0.3-threadfix.vpk; version 00.30.
+The original centered 4:3 viewport and black side borders are preserved.
+This is still a hardware-test build, not a hardware-confirmed fix.

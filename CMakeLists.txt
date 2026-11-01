@@ -12,8 +12,10 @@ target_compile_options(DeadBabiesXVita PRIVATE -O2 -ffp-contract=off -fno-fast-m
 # libstdc++ tests this weak pthread symbol to enable std::thread and atomic
 # shared_ptr reference counts. Static linking does not pull it from libpthread
 # unless explicitly required, even when pthread_create is already linked.
+# Keep the entire pthread archive below: enabling the probe alone leaves other
+# weak gthread calls (notably pthread_once) unresolved and callable at address 0.
 target_link_options(DeadBabiesXVita PRIVATE "LINKER:-u,pthread_cancel")
-target_link_libraries(DeadBabiesXVita PRIVATE SDL2 pthread SceNet_stub SceNetCtl_stub SceGxm_stub SceDisplay_stub SceCtrl_stub SceAppMgr_stub SceAppUtil_stub SceAudio_stub SceAudioIn_stub SceSysmodule_stub SceIofilemgr_stub SceCommonDialog_stub SceTouch_stub SceHid_stub SceMotion_stub ScePower_stub SceProcessmgr_stub m)
+target_link_libraries(DeadBabiesXVita PRIVATE SDL2 "-Wl,--whole-archive" pthread "-Wl,--no-whole-archive" SceNet_stub SceNetCtl_stub SceGxm_stub SceDisplay_stub SceCtrl_stub SceAppMgr_stub SceAppUtil_stub SceAudio_stub SceAudioIn_stub SceSysmodule_stub SceIofilemgr_stub SceCommonDialog_stub SceTouch_stub SceHid_stub SceMotion_stub ScePower_stub SceProcessmgr_stub m)
 vita_create_self(eboot.bin DeadBabiesXVita)
 file(GLOB_RECURSE ASSETS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/assets" "assets/*")
 set(VPK_FILES)
@@ -22,4 +24,4 @@ foreach(asset ${ASSETS})
   list(APPEND VPK_FILES FILE "${CMAKE_CURRENT_SOURCE_DIR}/assets/${asset}" "${asset}")
  endif()
 endforeach()
-vita_create_vpk(DeadBabiesX-Vita-v0.2-crashfix.vpk DBXV00001 eboot.bin VERSION 00.20 NAME "Dead Babies X" ${VPK_FILES} FILE vita/icon0.png sce_sys/icon0.png FILE vita/bg.png sce_sys/livearea/contents/bg.png FILE vita/startup.png sce_sys/livearea/contents/startup.png FILE vita/template.xml sce_sys/livearea/contents/template.xml)
+vita_create_vpk(DeadBabiesX-Vita-v0.3-threadfix.vpk DBXV00001 eboot.bin VERSION 00.30 NAME "Dead Babies X" ${VPK_FILES} FILE vita/icon0.png sce_sys/icon0.png FILE vita/bg.png sce_sys/livearea/contents/bg.png FILE vita/startup.png sce_sys/livearea/contents/startup.png FILE vita/template.xml sce_sys/livearea/contents/template.xml)
