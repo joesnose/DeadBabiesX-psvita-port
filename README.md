@@ -3,13 +3,18 @@ psvita port of the og xbox homebrew game DeadBabiesX xtreme
 
 [Latest release](https://github.com/joesnose/DeadBabiesX-psvita-port/releases/latest)
 
-**[Download the Vita VPK](downloads/DeadBabiesX-Vita-v0.1.vpk?raw=true)**
+**[Download the v0.2 crash-fix Vita VPK](https://github.com/joesnose/DeadBabiesX-psvita-port/releases/download/vita-v0.2-crashfix/DeadBabiesX-Vita-v0.2-crashfix.vpk)**
+
+v0.2 fixes static pthread linkage responsible for the Host/Join threading error.
+The original 4:3 display remains centered with black borders on both sides.
+See [crash-fix details and testing limits](CRASHFIX.md). Physical Vita testing
+is still required to confirm the reported random gameplay crash is resolved.
 
 Built from the native C++ game source using VitaSDK and SDL 2.32.8's native GXM renderer. This is a **first hardware-test preview**, not a confirmed-working Vita release. The ARM executable, SELF and VPK have been built and package integrity checked; no physical Vita was available for testing.
 
 ## Install
 
-Use VitaShell on a homebrew-enabled PS Vita or PS TV to install `DeadBabiesX-Vita-v0.1.vpk`. Launch the Dead Babies X bubble. All game assets are included; no Android APK, browser, Windows emulator, OpenGL plugin or external shader compiler is required.
+Use VitaShell on a homebrew-enabled PS Vita or PS TV to install `DeadBabiesX-Vita-v0.2-crashfix.vpk`. Launch the Dead Babies X bubble. All game assets are included; no Android APK, browser, Windows emulator, OpenGL plugin or external shader compiler is required.
 
 Title ID: `DBXV00001`. Saves, controller mappings, last host IP and `native.log` use `ux0:data/DeadBabiesX/` and are separate from the installed app.
 
@@ -51,7 +56,7 @@ cmake -S . -B build -G Ninja
 cmake --build build
 ```
 
-The output is `build/DeadBabiesX-Vita-v0.1.vpk`. Assets and LiveArea resources are packaged automatically. Obsolete PSP art-source files, WMA music and thumbnail databases are excluded from the VPK.
+The output is `build/DeadBabiesX-Vita-v0.2-crashfix.vpk`. Assets and LiveArea resources are packaged automatically. Obsolete PSP art-source files, WMA music and thumbnail databases are excluded from the VPK.
 
 ## Credits
 

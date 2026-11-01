@@ -5,7 +5,11 @@
 #include <unistd.h>
 #include <cstdlib>
 #include <cstdio>
-extern "C" { unsigned int _newlib_heap_size_user=128*1024*1024; }
+extern "C" {
+unsigned int _newlib_heap_size_user=128*1024*1024;
+// LAN runs C++ and newlib socket polling on this stack (32 KiB by default).
+unsigned int _pthread_stack_default_user=256*1024;
+}
 static void*netHeap=nullptr;static bool netOwned=false,ctlOwned=false;static int oldCpu=0;
 void VitaPlatformInit(){sceIoMkdir("ux0:data/DeadBabiesX",0777);chdir("ux0:data/DeadBabiesX");freopen("native.log","w",stderr);setvbuf(stderr,nullptr,_IONBF,0);
  oldCpu=scePowerGetArmClockFrequency();scePowerSetArmClockFrequency(444);sceSysmoduleLoadModule(SCE_SYSMODULE_NET);
