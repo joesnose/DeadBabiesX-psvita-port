@@ -3,7 +3,7 @@ psvita port of the og xbox homebrew game DeadBabiesX xtreme
 
 [Latest release](https://github.com/joesnose/DeadBabiesX-psvita-port/releases/latest)
 
-**[Download the v0.2 crash-fix Vita VPK](https://github.com/joesnose/DeadBabiesX-psvita-port/releases/download/vita-v0.2-crashfix/DeadBabiesX-Vita-v0.2-crashfix.vpk)**
+**[Download the v0.2 crash-fix Vita VPK](https://github.com/joesnose/DeadBabiesX-psvita-port/raw/refs/heads/main/downloads/DeadBabiesX-Vita-v0.2-crashfix.vpk)**
 
 v0.2 fixes static pthread linkage responsible for the Host/Join threading error.
 The original 4:3 display remains centered with black borders on both sides.
